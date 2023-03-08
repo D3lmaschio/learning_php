@@ -1,2 +1,6 @@
 <?php
-echo "<h1>Hello World</h1>";
+
+$age = 20;
+
+echo 'Hello World!' . PHP_EOL;
+echo "I'm $age years old!" . PHP_EOL;
