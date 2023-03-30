@@ -2,6 +2,8 @@
 
 namespace LI2\Bank\Model\Account;
 
+use LI2\Bank\Model\Exceptions\NullAccountException;
+
 abstract class Account
 {
     public function __construct(
@@ -34,21 +36,21 @@ abstract class Account
 
     public function deposit($valor): bool
     {
-        if ($valor >= 0) {
+        if ($valor > 0) {
             $this->balance += $valor;
             return true;
         }
-
         return false;
     }
 
     public function transfer($value, $account): bool
     {
+        if (is_null($account)) throw new NullAccountException();
+
         if ($value >= 0 && $value <= $this->balance) {
             $account->deposit($this->withdraw($value));
             return true;
         }
-
         return false;
     }
 
